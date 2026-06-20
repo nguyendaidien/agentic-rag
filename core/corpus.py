@@ -33,7 +33,11 @@ class CorpusLoader:
             for line in f:
                 if limit and count >= limit:
                     break
-                yield json.loads(line)
+                try:
+                    doc = json.loads(line)
+                except json.JSONDecodeError as e:
+                    raise ValueError(f"Malformed JSON at line {count} in {jsonl_path}: {e}") from e
+                yield doc
                 count += 1
 
     def download(self) -> None:
