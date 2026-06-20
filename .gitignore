@@ -1,0 +1,10 @@
+.env
+data/wiki10k/
+data/golden_set.jsonl
+data/*.pkl
+__pycache__/
+.venv/
+*.pyc
+dist/
+.superpowers/
+*.html
