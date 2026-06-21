@@ -1,3 +1,8 @@
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+
 from neo4j import GraphDatabase
 from core.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 from entity_extractor import extract_triples

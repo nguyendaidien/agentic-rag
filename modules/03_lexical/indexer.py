@@ -1,6 +1,11 @@
 """Build BM25 index from corpus and save to disk."""
+import sys
 import pickle
 from pathlib import Path
+
+# Allow direct imports from digit-prefixed module dir
+sys.path.insert(0, str(Path(__file__).parent))
+
 from core.corpus import CorpusLoader
 from bm25_retriever import BM25Retriever
 
