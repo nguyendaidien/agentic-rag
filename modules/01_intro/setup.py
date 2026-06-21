@@ -13,10 +13,10 @@ def check_qdrant() -> bool:
     try:
         client = get_client()
         client.get_collections()
-        print(f"✓ Qdrant reachable at {QDRANT_URL}")
+        print(f"[OK] Qdrant reachable at {QDRANT_URL}")
         return True
     except Exception as e:
-        print(f"✗ Qdrant not reachable: {e}")
+        print(f"[FAIL] Qdrant not reachable: {e}")
         print("  Run: docker compose up -d")
         return False
 
@@ -27,10 +27,10 @@ def check_neo4j() -> bool:
         driver = GraphDatabase.driver(NEO4J_URI, auth=("neo4j", "password"))
         driver.verify_connectivity()
         driver.close()
-        print(f"✓ Neo4j reachable at {NEO4J_URI}")
+        print(f"[OK] Neo4j reachable at {NEO4J_URI}")
         return True
     except Exception as e:
-        print(f"✗ Neo4j not reachable: {e}")
+        print(f"[FAIL] Neo4j not reachable: {e}")
         print("  Run: docker compose up -d")
         return False
 
@@ -39,7 +39,7 @@ def setup_corpus() -> None:
     loader = CorpusLoader()
     try:
         docs = list(loader.stream(limit=1))
-        print(f"✓ Corpus found, first doc: '{docs[0]['title']}'")
+        print(f"[OK] Corpus found, first doc: '{docs[0]['title']}'")
     except FileNotFoundError:
         print("Corpus not found. Downloading (this takes ~2 min)...")
         loader.download()
@@ -48,7 +48,7 @@ def setup_corpus() -> None:
 def setup_qdrant_collection() -> None:
     client = get_client()
     ensure_collection(client)
-    print("✓ Qdrant collection 'wiki10k' ready")
+    print("[OK] Qdrant collection 'wiki10k' ready")
 
 
 if __name__ == "__main__":

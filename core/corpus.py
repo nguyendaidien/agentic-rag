@@ -52,7 +52,7 @@ class CorpusLoader:
             return
 
         print("Downloading Wikipedia 10k subset...")
-        ds = load_dataset("wikipedia", "20220301.en", split="train", streaming=True)
+        ds = load_dataset("wikimedia/wikipedia", "20231101.en", split="train", streaming=True)
         count = 0
         with open(out_path, "w") as f:
             for item in tqdm(ds, total=10_000):
